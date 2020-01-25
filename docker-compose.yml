@@ -1,8 +1,9 @@
 version: '3'
 
 services:
-  db:
+  mysql_db:
     image: mysql:8
+    container_name: mysql_db
     #restart: always
     environment:
       MYSQL_ROOT_PASSWORD: springstudent
@@ -15,15 +16,15 @@ services:
   spring-expense-tracker:
     build: .
     depends_on:
-       - db
+       - mysql_db
     #restart: always
     environment:
-      - DB_HOST=db
+      - DB_HOST=mysql_db
       - DB_PORT=3306
       - DB_USER=root
       - DB_PASS=springstudent
       - DB_NAME=expense_tracker
     links:
-      - db:mysql
+      - mysql_db:mysql
     ports:
       - "7071:7071"
