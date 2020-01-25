@@ -1,3 +1,7 @@
+GRANT ALL PRIVILEGES ON *.* TO 'dbuser'@'%';
+UPDATE mysql.user SET Host='%' WHERE Host='localhost' AND User='root';
+FLUSH PRIVILEGES;
+
 CREATE DATABASE  IF NOT EXISTS `expense_tracker` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `expense_tracker`;
 -- MySQL dump 10.13  Distrib 5.6.13, for osx10.6 (i386)
