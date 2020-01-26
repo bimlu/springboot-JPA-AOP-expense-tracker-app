@@ -19,7 +19,7 @@ FROM openjdk:11-jdk
 VOLUME /tmp
  
 # Add Spring Boot app.jar to Container
-COPY --from=0 "/expensetracker/target/spring-expense-tracker.jar" app.jar
+COPY --from=0 "/expensetracker/target/ExpenseTracker-*-SNAPSHOT.jar" app.jar
  
 # Fire up our Spring Boot app by default
 CMD [ "sh", "-c", "java -Xmx300m -Xss512k -XX:CICompilerCount=2 -Dfile.encoding=UTF-8 -XX:+UseContainerSupport -Djava.security.egd=file:/dev/./urandom -jar /app.jar" ]
