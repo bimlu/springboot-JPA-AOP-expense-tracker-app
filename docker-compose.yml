@@ -30,6 +30,7 @@ services:
       - DB_USER=${MYSQL_USER}
       - DB_PASS=${MYSQL_ROOT_PASSWORD}
       - DB_NAME=${MYSQL_DATABASE}
+      - MYSQL_INITIALIZATION_SCRIPT: mysql-dev.sql 
     links:
       - mysql_db:mysql
     ports:
