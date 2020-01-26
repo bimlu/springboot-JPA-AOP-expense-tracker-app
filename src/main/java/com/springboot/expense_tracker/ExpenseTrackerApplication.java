@@ -9,7 +9,7 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 @SpringBootApplication
 public class ExpenseTrackerApplication {
-
+	
 	public static void main(String[] args) {
 		SpringApplication.run(ExpenseTrackerApplication.class, args);
 	}
@@ -28,4 +28,5 @@ public class ExpenseTrackerApplication {
         bean.setValidationMessageSource(messageSource());
         return bean;
     }
+    
 }

@@ -14,6 +14,7 @@ services:
       - "6603:3306"
 
   spring-expense-tracker:
+    container_name: spring-expense-tracker 
     build: .
     depends_on:
        - mysql_db
@@ -21,7 +22,7 @@ services:
     environment:
       - DB_HOST=mysql_db
       - DB_PORT=3306
-      - DB_USER=root
+      - DB_USER=springstudent
       - DB_PASS=springstudent
       - DB_NAME=expense_tracker
     links:
