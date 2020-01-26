@@ -1,0 +1,18 @@
+setup:
+  addons:
+    - plan: cleardb
+      as: DATABASE
+  config:
+    DB_HOST: ${DB_HOST}
+    DB_USER: ${DB_USER}
+    DB_PASS: ${DB_PASS}
+    DB_SCHEMA: ${DB_SCHEMA}
+build:
+  docker:
+    web: Dockerfile
+  config:
+    DB_HOST: ${DB_HOST}
+    DB_USER: ${DB_USER}
+    DB_PASS: ${DB_PASS}
+    DB_SCHEMA: ${DB_SCHEMA}
+    MYSQL_INITIALIZATION_SCRIPT: mysql-prod.sql 
