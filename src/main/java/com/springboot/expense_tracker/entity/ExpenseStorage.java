@@ -61,6 +61,19 @@ public class ExpenseStorage {
 		this.date = formatter.format(dateObj); 
 	}
 
+	public ExpenseStorage(@NotBlank(message = "This field is mandatory.") String owner,
+			@NotBlank(message = "This field is mandatory.") String product,
+			@NotNull(message = "This field is mandatory.") @Min(value = 0, message = "must be greater than or equal to zero") Integer cost,
+			@NotBlank(message = "This field is mandatory.") String date, String category) {
+		this.owner = owner;
+		this.product = product;
+		this.cost = cost;
+		this.date = date;
+		this.category = category;
+	}
+
+
+
 	public int getId() {
 		return id;
 	}

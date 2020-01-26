@@ -60,6 +60,5 @@ public class LoggingAspect {
 	public void afterServicesMethod(JoinPoint theJoinPoint) {		 
 		MethodSignature methodSig = (MethodSignature) theJoinPoint.getSignature();		
 		logger.info("Method = " + methodSig);
-		Object[] args = theJoinPoint.getArgs();
 	}
 }

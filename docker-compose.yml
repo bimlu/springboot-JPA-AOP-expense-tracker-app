@@ -1,14 +1,14 @@
 version: '3'
 
 services:
-  db:
-    image: mysql/mysql-server:5.6
+  mysql_db:
+    image: mysql:8
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: springstudent
-      MYSQL_DATABASE: expense_tracker
-      MYSQL_USER: dbuser
-      MYSQL_PASSWORD: springstudent
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: root ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     expose:
       - 6603
     ports:
@@ -22,14 +22,14 @@ services:
   spring-expense-tracker:
     build: .
     depends_on:
-       - db
+       - mysql_db
     restart: always
     environment:
-      - DB_HOST=mysql_db
-      - DB_PORT=3306
-      - DB_USER=dbuser
-      - DB_PASS=springstudent
-      - DB_NAME=expense_tracker
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_USER=${MYSQL_USER}
+      - DB_PASS=${MYSQL_ROOT_PASSWORD}
+      - DB_NAME=${MYSQL_DATABASE}
     links:
       - mysql_db:mysql
     ports:
