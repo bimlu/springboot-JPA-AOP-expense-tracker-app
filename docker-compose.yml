@@ -7,30 +7,29 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: root ${MYSQL_USER}
+      MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     expose:
       - 6603
     ports:
       - 6603:3306
-    volumes:
-      - ./schema-mysql.sql:/docker-entrypoint-initdb.d/schema-mysql.sql
-#      - ./db-data:/var/lib/mysql
     networks:
       - springboot-expense
 
   spring-expense-tracker:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     depends_on:
        - mysql_db
     restart: always
     environment:
       - DB_HOST=${DB_HOST}
-      - DB_PORT=${DB_PORT}
+      - DB_PORT=3306
       - DB_USER=${MYSQL_USER}
       - DB_PASS=${MYSQL_ROOT_PASSWORD}
-      - DB_NAME=${MYSQL_DATABASE}
-      - MYSQL_INITIALIZATION_SCRIPT: mysql-dev.sql 
+      - DB_SCHEMA=${MYSQL_DATABASE}
+      - ACTIVE_PROFILE=${ACTIVE_PROFILE}
     links:
       - mysql_db:mysql
     ports:

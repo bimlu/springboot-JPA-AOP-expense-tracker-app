@@ -1,9 +1,0 @@
-spring:
-  datasource:
-    url: jdbc:mysql://${DB_HOST}/${DB_SCHEMA}?reconnect=true
-    username: ${DB_USER}
-    password: ${DB_PASS}    
-    initialization-mode: always    
-    data: ${MYSQL_INITIALIZATION_SCRIPT}
-  jpa:
-    database-platform: org.hibernate.dialect.MySQL5Dialect    

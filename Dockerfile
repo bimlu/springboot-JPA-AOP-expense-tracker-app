@@ -3,20 +3,14 @@
 # 1. Building the App with Maven
 FROM maven:3-jdk-11
  
-ADD . /expensetracker
-WORKDIR /expensetracker
+ADD . /expensetracker_staging
+WORKDIR /expensetracker_staging
 
-ENV DB_HOST=${DB_HOST} 
-ENV DB_USER=${DB_USER}       
-ENV DB_PASS=${DB_PASS}       
-ENV DB_SCHEMA=${DB_SCHEMA}       
- 
 # Just echo so we can see, if everything is there :)
 RUN ls -l
  
 # Run Maven build
-RUN mvn clean install
- 
+RUN mvn clean install -DskipTests
  
 # 2. Just using the build artifact and then removing the build-container
 FROM openjdk:11-jdk
@@ -24,7 +18,7 @@ FROM openjdk:11-jdk
 VOLUME /tmp
  
 # Add Spring Boot app.jar to Container
-COPY --from=0 "/expensetracker/target/spring-expense-tracker.jar" app.jar
+COPY --from=0 "/expensetracker_staging/target/spring-expense-tracker.jar" app.jar
 
 # Fire up our Spring Boot app by default
-CMD [ "sh", "-c", "java -Dserver.port=$PORT -Xmx300m -Xss512k -XX:CICompilerCount=2 -Dfile.encoding=UTF-8 -XX:+UseContainerSupport -Djava.security.egd=file:/dev/./urandom -jar /app.jar" ]
+CMD [ "sh", "-c", "java -Dserver.port=$PORT -Xmx300m -Xss512k -XX:CICompilerCount=2 -Dfile.encoding=UTF-8 -XX:+UseContainerSupport -Dspring.profiles.active=$ACTIVE_PROFILE -Djava.security.egd=file:/dev/./urandom -jar /app.jar" ]
