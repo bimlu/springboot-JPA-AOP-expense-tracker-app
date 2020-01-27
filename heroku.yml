@@ -3,16 +3,16 @@ setup:
     - plan: cleardb
       as: DATABASE
   config:
-    DB_HOST: ${DB_HOST}
-    DB_USER: ${DB_USER}
-    DB_PASS: ${DB_PASS}
-    DB_SCHEMA: ${DB_SCHEMA}
+    DB_HOST: us-cdbr-iron-east-05.cleardb.net 
+    DB_USER: bedc05bb223ff2
+    DB_PASS: b8d7539f
+    DB_SCHEMA: heroku_03bb98c266dd851
 build:
   docker:
     web: Dockerfile
   config:
-    DB_HOST: ${DB_HOST}
-    DB_USER: ${DB_USER}
-    DB_PASS: ${DB_PASS}
-    DB_SCHEMA: ${DB_SCHEMA}
+    DB_HOST: us-cdbr-iron-east-05.cleardb.net 
+    DB_USER: bedc05bb223ff2
+    DB_PASS: b8d7539f
+    DB_SCHEMA: heroku_03bb98c266dd851
     MYSQL_INITIALIZATION_SCRIPT: mysql-prod.sql 
