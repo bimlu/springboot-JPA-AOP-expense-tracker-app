@@ -5,6 +5,11 @@ FROM maven:3-jdk-11
  
 ADD . /expensetracker
 WORKDIR /expensetracker
+
+ENV DB_HOST=${DB_HOST} 
+ENV DB_USER=${DB_USER}       
+ENV DB_PASS=${DB_PASS}       
+ENV DB_SCHEMA=${DB_SCHEMA}       
  
 # Just echo so we can see, if everything is there :)
 RUN ls -l
@@ -22,4 +27,4 @@ VOLUME /tmp
 COPY --from=0 "/expensetracker/target/spring-expense-tracker.jar" app.jar
 
 # Fire up our Spring Boot app by default
-CMD [ "sh", "-c", "java -Dserver.port=$PORT -DDB_HOST=$DB_HOST -DDB_USER=$DB_USER -DDB_PASS=$DB_PASS -DDB_SCHEMA=$DB_SCHEMA -Xmx300m -Xss512k -XX:CICompilerCount=2 -Dfile.encoding=UTF-8 -XX:+UseContainerSupport -Djava.security.egd=file:/dev/./urandom -jar /app.jar" ]
+CMD [ "sh", "-c", "java -Dserver.port=$PORT -Xmx300m -Xss512k -XX:CICompilerCount=2 -Dfile.encoding=UTF-8 -XX:+UseContainerSupport -Djava.security.egd=file:/dev/./urandom -jar /app.jar" ]
