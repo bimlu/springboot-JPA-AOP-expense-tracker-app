@@ -1,5 +1,5 @@
 # springboot-JPA-AOP-expense-tracker-app
-Build Expense tracker application using springboot, JPA, AOP with containerization using Docker.
+Expense tracker application built using spring-boot, Spring JPA, Spring AOP with containerization using Docker.
 
 **DEMO**
  - Deployed to Heroku Cloud: 
